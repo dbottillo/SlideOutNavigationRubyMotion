@@ -5,7 +5,6 @@ class FirstViewController < ContentViewController
      self.title = 'First Controller'
      
      navigationItem.leftBarButtonItem = UIBarButtonItem.alloc.initWithTitle("Menu", style:UIBarButtonItemStylePlain, target:self, action:"slideMenuButtonTouched")
-     
      navigationItem.rightBarButtonItem = UIBarButtonItem.alloc.initWithTitle("Push", style:UIBarButtonItemStylePlain, target:self, action:"pushThird")
   end
 
@@ -19,7 +18,7 @@ class FirstViewController < ContentViewController
   
   
   def pushThird
-    third = ThirdViewController.alloc.init
+    third = ThirdViewController.alloc.init if @third == nil
     navigationController.pushViewController(third, animated:true)    
   end
 end

@@ -6,22 +6,24 @@ class MenuViewController < UIViewController
     self.view = UIView.alloc.initWithFrame(UIScreen.mainScreen.bounds)
     view.backgroundColor = UIColor.scrollViewTexturedBackgroundColor
     
-    
+    # tableView for select a page to display    
     @tableView = UITableView.alloc.initWithFrame([[0,0],[254,460]])
     @tableView.backgroundColor = selectColor(73,87,107)
-    #@tableView.separatorStyle = UITableViewCellSeparatorStyleNone
     @tableView.dataSource = @tableView.delegate = self
     view.addSubview(@tableView)
     
+    # UIImageView on the right with the screenshot of the last contentViewController
     @screenShotImageView = UIImageView.alloc.init
     @screenShotImageView.userInteractionEnabled = true
     view.addSubview(@screenShotImageView)
   end
   
   def viewDidLoad
+    # tapGesture for closing menu tapping the UIImageView on the right
     @tapGesture = UITapGestureRecognizer.alloc.initWithTarget(self, action:"singleTapScreenShot:")
     @screenShotImageView.addGestureRecognizer @tapGesture
     
+    # panGesture for managing panning of UIImageView
     @panGesture = UIPanGestureRecognizer.alloc.initWithTarget(self, action:"panGestureMoveAround:")
     @panGesture.setMaximumNumberOfTouches 2
     @panGesture.setDelegate self
@@ -29,8 +31,8 @@ class MenuViewController < UIViewController
   end 
   
   def viewWillAppear(animated)
+    # put the screenshot of the last contentViewController and perform an animation from left to right
     @screenShotImageView.setImage(@screenShotImage) 
-  
     @screenShotImageView.setFrame([[0,-20],[self.view.frame.size.width, self.view.frame.size.height+20]])
     
     UIView.animateWithDuration(0.25, delay:0, options: UIViewAnimationCurveEaseInOut, animations:lambda do
@@ -39,7 +41,7 @@ class MenuViewController < UIViewController
   end
  
  
-  
+  # perform the animation from right to left and then close the menu
   def slideThenHide
     UIView.animateWithDuration(0.25, delay:0, options: UIViewAnimationCurveEaseInOut, animations:lambda do
       @screenShotImageView.setFrame([[0,-20],[self.view.frame.size.width, self.view.frame.size.height+20]])
@@ -107,8 +109,6 @@ class MenuViewController < UIViewController
   end
     
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
-    #appDelegate.setContentViewController(FirstViewController.alloc.init) if indexPath.row == 0
-    #appDelegate.setContentViewController(SecondViewController.alloc.init) if indexPath.row == 1
     appDelegate.setCurrentController(indexPath.row)
     
     slideThenHide
