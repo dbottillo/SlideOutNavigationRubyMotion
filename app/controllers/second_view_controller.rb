@@ -10,8 +10,8 @@ class SecondViewController < ContentViewController
   def viewDidLoad
     view.backgroundColor = UIColor.whiteColor
 
-    first = UILabel.alloc.initWithFrame([[20,0],[300,50]])
-    first.text = "Second Controller"
-    self.view.addSubview(first)
+    label = UILabel.alloc.initWithFrame([[20,0],[300,50]])
+    label.text = "Second Controller"
+    self.view.addSubview(label)
   end
 end

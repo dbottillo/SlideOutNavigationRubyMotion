@@ -107,23 +107,12 @@ class MenuViewController < UIViewController
   end
     
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
-    if indexPath.row == 0
-      appDelegate.setContentViewController(FirstViewController.alloc.init)
-    else
-      appDelegate.setContentViewController(SecondViewController.alloc.init)
-    end
+    #appDelegate.setContentViewController(FirstViewController.alloc.init) if indexPath.row == 0
+    #appDelegate.setContentViewController(SecondViewController.alloc.init) if indexPath.row == 1
+    appDelegate.setCurrentController(indexPath.row)
     
     slideThenHide
     tableView.deselectRowAtIndexPath(indexPath, animated:true)
-
-#    news = @news[indexPath.row]
-    
-  #  detail = DetailNewsController.alloc.init
- #   navigationController.pushViewController(detail, animated:true)
-   # detail.showNews(news)
-    
-    #tableView.deselectRowAtIndexPath(indexPath, animated:true)
-
   end
 
   

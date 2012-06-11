@@ -8,7 +8,10 @@ class AppDelegate
     
     @menuViewController = MenuViewController.alloc.init
     
-    @contentViewController = UINavigationController.alloc.initWithRootViewController(FirstViewController.alloc.init)
+    
+    @firstContainer = UINavigationController.alloc.initWithRootViewController(FirstViewController.alloc.init)
+    
+    @contentViewController = @firstContainer
     
     @window.rootViewController = @contentViewController
     
@@ -18,8 +21,14 @@ class AppDelegate
     true
   end
   
-  def setContentViewController(controller)
-    @contentViewController = UINavigationController.alloc.initWithRootViewController(controller)
+  def setCurrentController(index)
+    if index == 0 then
+      @firstContainer = UINavigationController.alloc.initWithRootViewController(FirstViewController.alloc.init) if @firstContainer == nil
+      @contentViewController = @firstContainer
+    else
+      @secondContainer = UINavigationController.alloc.initWithRootViewController(SecondViewController.alloc.init) if @secondContainer == nil
+      @contentViewController = @secondContainer
+    end
   end
   
   def showSideMenu
