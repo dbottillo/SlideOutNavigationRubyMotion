@@ -1,8 +1,8 @@
-class FirstViewController < ContentViewController
+class SecondViewController < ContentViewController
   
   def loadView
      self.view = UIView.alloc.init
-     self.title = 'First Controller'
+     self.title = 'Second Controller'
      
      navigationItem.leftBarButtonItem = UIBarButtonItem.alloc.initWithTitle("Menu", style:UIBarButtonItemStylePlain, target:self, action:"slideMenuButtonTouched")
   end
@@ -11,7 +11,7 @@ class FirstViewController < ContentViewController
     view.backgroundColor = UIColor.whiteColor
 
     first = UILabel.alloc.initWithFrame([[20,0],[300,50]])
-    first.text = "First Controller"
+    first.text = "Second Controller"
     self.view.addSubview(first)
   end
 end
